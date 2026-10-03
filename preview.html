@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOOTSHOEPH — AI-Powered Sneaker Store Demo</title>
+<style>
+:root{--bg:#f7f7f5;--ink:#111;--muted:#6d6d6d;--card:#fff;--line:#e7e7e4;--accent:#111}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{text-decoration:none;color:inherit}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.logo{font-weight:900;letter-spacing:-1.5px;font-size:21px}.logo span{font-weight:500}.navlinks{display:flex;gap:28px;font-size:13px}.navcta{background:#111;color:#fff;padding:12px 18px;border-radius:99px;font-weight:700;font-size:12px}
+.hero{padding:82px 6vw 60px;display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center;max-width:1280px;margin:auto}
+.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;margin-bottom:18px}.hero h1{font-size:clamp(48px,6vw,82px);line-height:.92;letter-spacing:-5px;margin:0 0 24px}.hero p{font-size:17px;line-height:1.65;color:#555;max-width:520px}.buttons{display:flex;gap:12px;margin-top:28px}.btn{padding:15px 22px;border-radius:99px;font-size:13px;font-weight:800}.primary{background:#111;color:#fff}.secondary{border:1px solid #ccc;background:#fff}
+.hero-art{min-height:450px;border-radius:30px;background:#e9e9e6;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-art:before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:#d7d7d2;top:35px;right:-70px}
+.shoe{position:relative;width:360px;height:190px;transform:rotate(-8deg);filter:drop-shadow(0 28px 20px rgba(0,0,0,.16));z-index:2}
+.shoe .upper{position:absolute;left:45px;top:30px;width:240px;height:105px;background:linear-gradient(145deg,#fff,#d7d7d2);border-radius:70% 28% 18% 28%;transform:skewX(-12deg)}
+.shoe .sole{position:absolute;left:25px;bottom:24px;width:315px;height:45px;background:#111;border-radius:28px 45px 20px 22px}
+.shoe .sole:after{content:"";position:absolute;left:20px;right:18px;bottom:7px;height:9px;background:#777;border-radius:10px}
+.shoe .stripe{position:absolute;left:105px;top:48px;width:82px;height:11px;background:#111;transform:rotate(18deg);border-radius:8px;z-index:3;box-shadow:0 20px 0 #111,0 40px 0 #111}
+.shoe .lace{position:absolute;left:175px;top:40px;width:72px;height:50px;border-top:3px solid #999;border-bottom:3px solid #999;transform:rotate(-12deg);z-index:3}
+.badge{position:absolute;bottom:28px;left:28px;background:#111;color:#fff;padding:9px 13px;border-radius:99px;font-size:10px;font-weight:800;letter-spacing:.5px;z-index:4}
+.section{max-width:1280px;margin:auto;padding:75px 6vw}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}.section h2{font-size:38px;letter-spacing:-2px;margin:0}.section-head p{color:#777;font-size:13px;max-width:340px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.product{background:#fff;border:1px solid var(--line);border-radius:22px;padding:14px;overflow:hidden}.product-img{height:260px;background:#f0f0ed;border-radius:16px;display:flex;align-items:center;justify-content:center;position:relative}.product-img .shoe{transform:scale(.62) rotate(-8deg)}.tag{position:absolute;left:12px;top:12px;background:#111;color:#fff;border-radius:99px;padding:7px 10px;font-size:9px;font-weight:800}.product-info{padding:18px 4px 5px;display:flex;justify-content:space-between;gap:10px}.product h3{font-size:14px;margin:0 0 6px}.product p{font-size:11px;color:#888;margin:0}.price{font-weight:900;font-size:14px}
+.offer{background:#111;color:#fff;border-radius:28px;padding:38px 42px;display:flex;justify-content:space-between;align-items:center;gap:30px}.offer h2{margin:0;font-size:32px;letter-spacing:-1.5px}.offer p{color:#aaa;margin:8px 0 0;font-size:13px}.offer .btn{background:#fff;color:#111;white-space:nowrap}
+.ai{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}.ai-copy h2{font-size:45px;letter-spacing:-2.5px;margin:0 0 16px}.ai-copy p{color:#666;line-height:1.7;max-width:500px}.checks{list-style:none;padding:0;margin:25px 0}.checks li{margin:12px 0;font-size:13px}.checks li:before{content:"✓";font-weight:900;margin-right:10px}
+.chat{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.08);overflow:hidden}.chat-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800}.dot{width:9px;height:9px;border-radius:50%;background:#20c56a}.messages{padding:22px;height:340px;display:flex;flex-direction:column;gap:13px;background:#fafaf8}.msg{max-width:78%;padding:11px 13px;border-radius:15px;font-size:12px;line-height:1.5}.bot{background:#fff;border:1px solid var(--line);align-self:flex-start}.user{background:#111;color:#fff;align-self:flex-end}.chat-input{display:flex;padding:12px;border-top:1px solid var(--line);gap:8px}.fakeinput{flex:1;background:#f2f2ef;border-radius:99px;padding:12px 15px;font-size:11px;color:#888}.send{border:0;background:#111;color:#fff;border-radius:99px;padding:0 17px;font-weight:800}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px}.num{font-size:11px;font-weight:900;color:#999}.step h3{font-size:18px;margin:30px 0 8px}.step p{font-size:12px;line-height:1.6;color:#777}
+.footer{padding:45px 6vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:#777}.footer strong{color:#111}
+@media(max-width:800px){.hero,.ai{grid-template-columns:1fr}.grid,.steps{grid-template-columns:1fr}.navlinks{display:none}.hero{padding-top:50px}.hero h1{letter-spacing:-3px}.offer{flex-direction:column;align-items:flex-start}.footer{flex-direction:column;gap:12px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">FOOTSHOEPH<span>.</span></div>
+  <div class="navlinks"><a href="#shop">Shop</a><a href="#ai">AI Concierge</a><a href="#offer">Offer</a></div>
+  <a class="navcta" href="#ai">Ask the AI</a>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">BUY 1 · TAKE 1 · FREE SHIPPING</div>
+    <h1>Fresh pairs.<br>Zero hassle.</h1>
+    <p>A premium demo storefront designed for a sneaker brand — with an AI shopping assistant that answers customers instantly and helps turn Instagram inquiries into orders.</p>
+    <div class="buttons"><a class="btn primary" href="#shop">Shop the drop</a><a class="btn secondary" href="#ai">Try AI concierge</a></div>
+  </div>
+  <div class="hero-art">
+    <div class="badge">NEW DROP · LIMITED</div>
+    <div class="shoe"><div class="upper"></div><div class="sole"></div><div class="stripe"></div><div class="lace"></div></div>
+  </div>
+</header>
+
+<section class="section" id="shop">
+  <div class="section-head"><div><div class="eyebrow">THE COLLECTION</div><h2>Built for the feed.</h2></div><p>Clean product presentation with clear pricing, offer tags and a fast path to purchase.</p></div>
+  <div class="grid">
+    <article class="product"><div class="product-img"><span class="tag">BESTSELLER</span><div class="shoe"><div class="upper"></div><div class="sole"></div><div class="stripe"></div><div class="lace"></div></div></div><div class="product-info"><div><h3>Street Runner — Black</h3><p>Sizes 6–11 · Ready to ship</p></div><div class="price">₹1,999</div></div></article>
+    <article class="product"><div class="product-img"><span class="tag">NEW</span><div class="shoe" style="transform:scale(.62) rotate(7deg)"><div class="upper"></div><div class="sole"></div><div class="stripe"></div><div class="lace"></div></div></div><div class="product-info"><div><h3>Classic Low — White</h3><p>Sizes 6–11 · Ready to ship</p></div><div class="price">₹1,899</div></div></article>
+    <article class="product"><div class="product-img"><span class="tag">LIMITED</span><div class="shoe" style="transform:scale(.62) rotate(-3deg)"><div class="upper"></div><div class="sole"></div><div class="stripe"></div><div class="lace"></div></div></div><div class="product-info"><div><h3>Runner Pro — Grey</h3><p>Sizes 7–12 · Limited stock</p></div><div class="price">₹2,299</div></div></article>
+  </div>
+</section>
+
+<section class="section" id="offer">
+  <div class="offer"><div><h2>BUY 1 · TAKE 1</h2><p>Free shipping · Same-day delivery via local delivery partners</p></div><a class="btn" href="#ai">Get help choosing</a></div>
+</section>
+
+<section class="section" id="ai">
+  <div class="ai">
+    <div class="ai-copy"><div class="eyebrow">AI SHOPPING CONCIERGE</div><h2>Your customers can ask. The AI can sell.</h2><p>This is the core automation demo from <strong>Minimal Agency</strong>: an AI assistant trained on the store's products, offers, shipping rules and FAQs.</p><ul class="checks"><li>Answers product, size, price and delivery questions</li><li>Recommends products based on customer needs</li><li>Handles repetitive Instagram-style inquiries 24/7</li><li>Hands hot leads to a human when needed</li></ul><a class="btn primary" href="#contact">Build this for your store</a></div>
+    <div class="chat"><div class="chat-head"><span class="dot"></span> Footshoe AI · Online</div><div class="messages"><div class="msg user">Do you have the black pair in size 9?</div><div class="msg bot">Yes 👟 The Street Runner in Black is available in size 9. It's ₹1,999 and currently ready to ship.</div><div class="msg user">Can I get free shipping?</div><div class="msg bot">Yes — this store is running FREE SHIPPING. You can also ask me about the Buy 1 Take 1 offer.</div><div class="msg user">How do I order?</div><div class="msg bot">I can collect your size, colour and delivery details, then pass the order to the team. Want to continue?</div></div><div class="chat-input"><div class="fakeinput">Ask about size, price, delivery...</div><button class="send">→</button></div></div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-head"><div><div class="eyebrow">HOW MINIMAL AGENCY BUILDS IT</div><h2>From DM to order.</h2></div><p>A simple three-step automation layer designed around the way the store already sells.</p></div>
+  <div class="steps">
+    <div class="step"><div class="num">01 / CONNECT</div><h3>Connect your customer channels</h3><p>Instagram DMs, website chat or other supported channels become one customer conversation.</p></div>
+    <div class="step"><div class="num">02 / TRAIN</div><h3>Train the AI on the business</h3><p>Products, prices, sizes, shipping, offers and FAQs are turned into a reliable sales knowledge base.</p></div>
+    <div class="step"><div class="num">03 / CONVERT</div><h3>Automate the repetitive work</h3><p>The AI answers, recommends, follows up and routes high-intent customers to the team.</p></div>
+  </div>
+</section>
+
+<footer class="footer"><div><strong>Minimal Agency</strong> · AI systems for modern businesses</div><div>Demo concept for FootshoePH · Replace demo products/prices before publishing</div></footer>
+</body>
+</html>
